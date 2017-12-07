@@ -1,6 +1,5 @@
 
 <?php
-	phpinfo();
-	var_dump(new MongoClient());
+	echo strlen('b1d5c6f46d9cbb1b93cc08073b50201e58d586b7af1b9889f0b58c08d9fd7aaddf0758428bd2db85f41cb1b6fcfacc2919813ca19ef323d3b973bbd716b7bc67');
 
 ?>

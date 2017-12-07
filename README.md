@@ -29,16 +29,21 @@
 * 2B商家微信公众号需要[网页授权获取用户基本信息接口](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842)
 
 ## 数据库模式
-* Merchants(__merchantID__)
-    * merchantID: 商户名加盐后的sha512值，主键
+* merchants(__merchantID__, merchantName)
+    key | value
+    --|--
+    merchantID | 商户名加盐后的MD5值，主键
+    merchantName | 商户名
 
-* Prizes(__id__, prizeName, _merchantID_, probability, total, remaining)
-    * id：         自增序号，主键
-    * merchantID： 外键
-    * prizeName：  奖品名称
-    * probability：中奖概率
-    * total：      奖品设置总数
-    * remaining：  奖品剩余数量
+* prizes(__id__, prizeName, _merchantID_, probability, total, remaining)
+    key | value
+    --|--
+    id | 自增序号，主键
+    merchantID | 外键
+    prizeName | 奖品名称
+    probabilityPercent |中奖概率的百分数的整数部分
+    total | 奖品设置总数
+    remaining | 奖品剩余数量
 
 ## 使用方法：
 **如果开发者没有权限修改2B商家微信公众平台配置和直接调用微信接口获取OpenID，则需要权限拥有者代为获取OpenID并转发给开发者（同时转发2C商家品牌名Hash）**
