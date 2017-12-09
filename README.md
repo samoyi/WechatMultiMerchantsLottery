@@ -35,7 +35,7 @@
     merchantID | 商户名加盐后的MD5值，主键
     merchantName | 商户名
 
-* prizes(__id__, prizeName, _merchantID_, probability, total, remaining)
+* prizes(__id__, _prizeName_, _merchantID_, probability, total, remaining)
     key | value
     --|--
     id | 自增序号，主键
@@ -44,6 +44,15 @@
     probabilityPercent |中奖概率的百分数的整数部分
     total | 奖品设置总数
     remaining | 奖品剩余数量
+
+* winners(__openid__, _merchantID_, _prizeName_, received)
+    key | value
+    --|--
+    openid | 用户OpenID，主键
+    merchantID | 外键
+    prizeName | 外键
+    receivedTime | 默认为0表示未兑奖，兑奖后存储时间戳
+
 
 ## 使用方法：
 **如果开发者没有权限修改2B商家微信公众平台配置和直接调用微信接口获取OpenID，则需要权限拥有者代为获取OpenID并转发给开发者（同时转发2C商家品牌名Hash）**

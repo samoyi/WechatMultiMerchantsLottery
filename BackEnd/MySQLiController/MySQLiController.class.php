@@ -554,19 +554,12 @@ class MySQLiController
     }
 
 	//更新值。第二个参数是要更改的值所在的列，第三个参数是新值，第四个参数WHERE子句用来定位到所在行
-	/*
-	 *	TODO 这里即使给列名加上双引号，result也会是true，但实际上数据并没有更新
-	 */
     public function updateData($tableName, $aLocValueCol, $aNewValue, $where)
     {
         if( sizeof($aLocValueCol) !== sizeof($aNewValue)){
             throw new Exception('要更改的列数和提供的更改值数目不对应');
             return false;
         }
-        /*function setUpdateStr( $value, $key )
-        {
-            $value . '="' .  $aNewValue[$key] . '",';
-        }*/
         $sUpdate = '';
         foreach($aLocValueCol as $key=>$value){
             $sUpdate .= $value . '="' .  $aNewValue[$key] . '",';
@@ -574,7 +567,7 @@ class MySQLiController
         $sUpdate = substr($sUpdate, 0, -1);//删除最后一个逗号
         $query = 'UPDATE ' . $tableName . ' SET ' . $sUpdate . ' WHERE ' . $where;
         $result = $this->dbr->query( $query );
-        if( $result ){
+        if( $this->dbr->affected_rows && $result ){
             return true;
         }
         else{
